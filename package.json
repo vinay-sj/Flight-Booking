@@ -1,0 +1,15 @@
+{
+  "name": "flight-booking-project-api",
+  "version": "1.0.0",
+  "description": "Flight Booking Project API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject-avengers-API.git"
+  },
+  "author": "Ram Tarun",
+  "license": "MIT"
+}
