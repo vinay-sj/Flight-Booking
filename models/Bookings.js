@@ -13,6 +13,16 @@ const BookingSchema = new Schema({
     default: undefined,
   },
   passengerDetails: [PassengerSchema],
+  flightNo: {
+    type: String,
+    required: true,
+    default: undefined,
+  },
+  airlineName: {
+    type: String,
+    required: true,
+    default: undefined,
+  },
 });
 
-module.exports = Bookings = mongoose.model("bookings", BookingSchema);
+module.exports = Bookings = mongoose.model('bookings', BookingSchema);
