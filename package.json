@@ -2,8 +2,10 @@
   "name": "flight-booking-project-api",
   "version": "1.0.0",
   "description": "Flight Booking Project API",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,5 +13,14 @@
     "url": "https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject-avengers-API.git"
   },
   "author": "Ram Tarun",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.25"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
