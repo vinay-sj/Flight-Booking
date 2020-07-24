@@ -19,19 +19,19 @@ const PassengerSchema = new Schema({
   },
   emailId: {
     type: String,
-    required: false
+    required: false,
   },
   contactNo: {
-      type: Number,
-      required: false
+    type: Number,
+    required: false,
   },
   passPortNo: {
-      type: String,
-      required: false
-  }
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = {
-    Passengers : mongoose.model("passengers", PassengerSchema),
-    PassengerSchema
-}
+  Passengers: mongoose.model('passengers', PassengerSchema),
+  PassengerSchema,
+};
