@@ -13,6 +13,10 @@ mongoose
   .then(() => console.log('Mongo Connected...'))
   .catch((err) => console.log(err));
 
+const bookingsRouter = require("./routes/api/flight-bookings")
+
+app.use('/api/bookings', bookingsRouter);
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

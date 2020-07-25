@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const PassengerSchema = require('./Passengers');
+const PassengerSchema = require('./Passengers').PassengerSchema;
 
-const BookingSchema = new Schema({
+let BookingSchema = new Schema({
   bookingDate: {
     type: Date,
     default: Date.now,
@@ -25,4 +25,4 @@ const BookingSchema = new Schema({
   },
 });
 
-module.exports = Bookings = mongoose.model('bookings', BookingSchema);
+module.exports = Bookings = mongoose.model('bookinglist', BookingSchema);
