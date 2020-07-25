@@ -25,4 +25,4 @@ let BookingSchema = new Schema({
   },
 });
 
-module.exports = Bookings = mongoose.model('bookinglist', BookingSchema);
+module.exports = Bookings = mongoose.model('bookinglist', BookingSchema, 'bookinglist');
