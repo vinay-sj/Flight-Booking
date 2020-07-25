@@ -8,7 +8,7 @@ const Bookings = require('../../models/Bookings');
 // List of Flights and prices directly from UI layer to Skyscanner API
 
 // Confirmed Bookings API
-router.get('/retireveBookings', (req, res) => {
+router.get('/retrieveBookings', (req, res) => {
   Bookings.find()
     .sort({ bookingDate: -1 })
     .then((items) => res.json(items));
@@ -16,11 +16,11 @@ router.get('/retireveBookings', (req, res) => {
 
 // Create a new Booking
 router.post('/confirmBooking', (req, res) => {
-//   const confirmBooking = new Bookings({
+  const confirmBooking = new Bookings({
+    ...req.body
+  });
 
-//   });
-
-//   confirmBooking.save().then((item) => res.json(item));
+  confirmBooking.save().then((item) => res.json(item));
 });
 
 module.exports = router;
