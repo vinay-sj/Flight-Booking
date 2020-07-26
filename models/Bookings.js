@@ -10,18 +10,18 @@ let BookingSchema = new Schema({
   journeyDate: {
     type: Date,
     required: true,
-    default: undefined,
+    default: Date.now,
   },
   passengerDetails: [PassengerSchema],
   flightNo: {
-    type: String,
+    type: Number,
     required: true,
-    default: undefined,
+    default: 11231,
   },
   airlineName: {
     type: String,
     required: true,
-    default: undefined,
+    default: "ABC Airlines",
   },
 });
 

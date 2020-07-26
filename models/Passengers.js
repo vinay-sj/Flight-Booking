@@ -12,7 +12,7 @@ const PassengerSchema = new Schema({
     required: true,
     default: undefined,
   },
-  birthDay: {
+  birthDate: {
     type: Date,
     default: undefined,
     required: true,
