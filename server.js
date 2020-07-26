@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const app = express();
 
@@ -14,6 +15,8 @@ mongoose
   .catch((err) => console.log(err));
 
 const bookingsRouter = require("./routes/api/flight-bookings")
+
+app.use(cors());
 
 app.use('/api/bookings', bookingsRouter);
 
