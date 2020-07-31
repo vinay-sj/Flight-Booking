@@ -36,7 +36,7 @@ let BookingSchema = new Schema({
   returnFlightNo: {
     type: String,
     required: false,
-    default: 11231,
+    default: 00000,
   },
   returnAirlineName: {
     type: String,
