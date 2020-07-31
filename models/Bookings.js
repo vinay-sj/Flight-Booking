@@ -12,6 +12,11 @@ let BookingSchema = new Schema({
     required: true,
     default: Date.now,
   },
+  numPassengers: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   passengerDetails: [PassengerSchema],
   flightNo: {
     type: String,
