@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const PassengerSchema = require('./Passengers').PassengerSchema;
 
-let BookingSchema = new Schema({
+const baseOptions = {
+  discriminatorKey: '__tripType'
+};
+
+const BookingSchema = new Schema({
   bookingDate: {
     type: Date,
     default: Date.now,
@@ -22,36 +26,42 @@ let BookingSchema = new Schema({
     flightNo: {
       type: String,
       required: true,
-      default: 00000,
     },
     airlineName: {
       type: String,
       required: true,
-      default: 'ABC Airlines',
     },
   },
-  returnFlag: {
+  isRoundTrip: {
     type: Boolean,
     required: true,
     default: false,
   },
+}, baseOptions);
+
+const OneWayBookings = mongoose.model('oneWayTrip', BookingSchema, 'bookinglist');
+
+const ReturnBookingSchema = new Schema({
   returnFlightDetails: {
     flightNo: {
       type: String,
-      required: false,
-      default: 00000,
+      required: true,
     },
     airlineName: {
       type: String,
-      required: false,
-      default: '00000000',
+      required: true,
     },
     journeyDate: {
       type: Date,
-      required: false,
+      required: true,
       default: Date.now,
     },
   },
 });
 
-module.exports = Bookings = mongoose.model('bookinglist', BookingSchema, 'bookinglist');
+const RoundWayBookings = OneWayBookings.discriminator('roundWayTrip', ReturnBookingSchema);
+
+module.exports = {
+  OneWayBookings ,
+  RoundWayBookings
+};

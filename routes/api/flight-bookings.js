@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Bookings = require('../../models/Bookings');
+const { OneWayBookings, RoundWayBookings } = require('../../models/Bookings');
 
 // List of Cities and Countries directly from UI layer to Skyscanner API
 
@@ -9,18 +9,26 @@ const Bookings = require('../../models/Bookings');
 
 // Confirmed Bookings API
 router.get('/retrieveBookings', (req, res) => {
-  Bookings.find()
-    .sort({ bookingDate: -1 })
-    .then((items) => res.json(items));
+  req.body.isRoundTrip
+    ? OneWayBookings.find()
+        .sort({ bookingDate: -1 })
+        .then((items) => res.json(items))
+    : RoundWayBookings.find()
+        .sort({ bookingDate: -1 })
+        .then((items) => res.json(items));
 });
 
 // Create a new Booking
 router.post('/confirmBooking', (req, res) => {
-  const confirmBooking = new Bookings({
-    ...req.body
-  });
+  const confirmBooking = !req.body.isRoundTrip
+    ? new OneWayBookings({
+        ...req.body,
+      })
+    : new RoundWayBookings({
+        ...req.body,
+      });
 
-  confirmBooking.save().then((item) => res.json(item));
+  confirmBooking.save().then((item) => res.json(item), (err) => res.json(err));
 });
 
 module.exports = router;
