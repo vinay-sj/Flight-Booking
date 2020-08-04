@@ -14,7 +14,7 @@ const BookingSchema = new Schema({
   numPassengers: {
     type: Number,
     required: true,
-    default: 0,
+    default: 1,
   },
   passengerDetails: [PassengerSchema],
   onwardFlightDetails: {
