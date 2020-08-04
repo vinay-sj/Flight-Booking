@@ -8,15 +8,19 @@ const { OneWayBookings, RoundWayBookings } = require('../../models/Bookings');
 // List of Flights and prices directly from UI layer to Skyscanner API
 
 // Confirmed Bookings API
-router.get('/retrieveBookings', (req, res) => {
-  req.body.isRoundTrip
-    ? OneWayBookings.find()
-        .sort({ bookingDate: -1 })
-        .then((items) => res.json(items))
-    : RoundWayBookings.find()
-        .sort({ bookingDate: -1 })
-        .then((items) => res.json(items));
+router.get('/oneWayBookings', (req, res) => {
+  OneWayBookings.find()
+  .sort({ bookingDate: -1 })
+  .then((items) => res.json(items));
 });
+
+router.get('/roundTripBookings', (req, res) => {
+  RoundWayBookings.find()
+  .sort({ bookingDate: -1 })
+  .then((items) => res.json(items));
+});
+
+
 
 // Create a new Booking
 router.post('/confirmBooking', (req, res) => {
@@ -30,5 +34,10 @@ router.post('/confirmBooking', (req, res) => {
 
   confirmBooking.save().then((item) => res.json(item), (err) => res.json(err));
 });
+
+// Delete Booking
+router.delete('/deleteOneWay:id',(req, res) => {
+  
+})
 
 module.exports = router;
