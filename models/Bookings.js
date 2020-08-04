@@ -7,6 +7,10 @@ const baseOptions = {
 };
 
 const BookingSchema = new Schema({
+  userEmail: {
+    type: String,
+    required: true
+  },
   bookingDate: {
     type: Date,
     default: Date.now,
