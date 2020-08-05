@@ -14,11 +14,13 @@ mongoose
   .then(() => console.log('Mongo Connected...'))
   .catch((err) => console.log(err));
 
-const bookingsRouter = require("./routes/api/flight-bookings")
+const bookingsRouter = require("./routes/api/flight-bookings");
+const passengersRouter = require("./routes/api/passenger-details");
 
 app.use(cors());
 
 app.use('/api/bookings', bookingsRouter);
+app.use('/api/passengers', passengersRouter);
 
 const port = process.env.PORT || 5000;
 
