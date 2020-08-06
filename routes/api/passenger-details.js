@@ -1,7 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 
-const {Passengers: Pass, PassengerSchema} = require('../../models/Passengers');
+const { Pass, PassengerSchema} = require('../../models/Passengers');
 
 router.get('/getPassenger', (req, res) => {
     Pass.find()
