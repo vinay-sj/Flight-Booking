@@ -9,7 +9,6 @@ let userCredentials = {};
 // Default Validation of all API requests towards Bookings 
 router.use('/', (req, res, next) => {
   userCredentials = validateAPIRequest(req, res) || {};
-  console.log(userCredentials);
   next()
 });
 
@@ -54,7 +53,6 @@ router.post('/confirmBooking', async (req, res) => {
 
 // Delete One Way Booking
 router.delete('/deleteOneWayTrip/:id', (req, res) => {
-  console.log("reached here")
   if (userCredentials.signedIn) {
     OneWayBookings.findById(req.params.id)
       .then((booking) => booking.remove().then(() => res.json({ success: true })))
