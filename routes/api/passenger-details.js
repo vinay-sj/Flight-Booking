@@ -26,6 +26,7 @@ router.put('/editPassenger:id', (req, res) => {
         passenger.emailId = passenger.emailId;
         passenger.contactNo = passenger.contactNo;
         passenger.passPortNo = passenger.passPortNo;
+        passenger.save();
     }).then(() => res.json({ success: true }))
         .catch(err => res.status(404).json({ success: false}));
 
