@@ -45,7 +45,7 @@ router.post('/confirmBooking', async (req, res) => {
         });
 
     confirmBooking.save().then(
-      (item) => res.json(item),
+      (item) => res.status(201).json(item),
       (err) => res.status(400).json(err)
     );
   }
