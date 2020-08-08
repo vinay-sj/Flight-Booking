@@ -50,7 +50,7 @@ const validateAPIRequest = (req, res) => {
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error
-      return res.status(401).json({ Message: 'Unauthorized Request' });
+      return res.status(401).json({ Message: 'Unauthorized Request, please login first to perform the operation' });
     }
     // otherwise, return a bad request error
     return res.status(400).json({ Message: 'Bad Request' });
