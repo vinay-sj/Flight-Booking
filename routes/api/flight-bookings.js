@@ -17,7 +17,7 @@ router.use('/', (req, res, next) => {
 // List of Flights and prices directly from UI layer to Skyscanner API
 
 // Get Confirmed Bookings
-router.get('/oneWayBookingsModel', (req, res) => {
+router.get('/oneWayBookings', (req, res) => {
   if (userCredentials.signedIn) {
     OneWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
