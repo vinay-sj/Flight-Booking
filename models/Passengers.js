@@ -33,5 +33,5 @@ const PassengerSchema = new Schema({
 
 module.exports = {
   PassengerSchema,
-  Pass: mongoose.model('passengers', PassengerSchema),
+  PassengerModel: mongoose.model('passengers', PassengerSchema),
 };

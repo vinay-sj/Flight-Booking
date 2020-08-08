@@ -1,7 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 
-const { Pass, PassengerSchema} = require('../../models/Passengers');
+const { PassengerModel, PassengerSchema} = require('../../models/Passengers');
 const { validateAPIRequest } = require('../../auth.js');
 
 let userCredentials = {};
@@ -13,13 +13,13 @@ router.use('/', (req, res, next) => {
 });
 
 router.get('/getPassenger', (req, res) => {
-    userCredentials.signedIn && Pass.find({emailId: userCredentials.email})
+    userCredentials.signedIn && PassengerModel.find({emailId: userCredentials.email})
     .then((items) => res.json(items));
 
 });
 
 router.post('/addPassenger', (req, res) => {
-    const passenger = new Pass({
+    const passenger = new PassengerModel({
         ...req.body, ...{emailId: userCredentials.email}
     });
     userCredentials.signedIn && passenger.save().then((item) => res.status(201).json(item), (err) => res.status(400).json(err));
@@ -27,7 +27,7 @@ router.post('/addPassenger', (req, res) => {
 });
 
 router.put('/editPassenger/:id', (req, res) => {
-    userCredentials.signedIn && Pass.findById(req.params.id)
+    userCredentials.signedIn && PassengerModel.findById(req.params.id)
     .then(passenger => {
         passenger.name = req.body.name;
         passenger.gender = req.body.gender;
@@ -42,7 +42,7 @@ router.put('/editPassenger/:id', (req, res) => {
 });
 
 router.delete('/deletePassenger/:id', (req, res) => {
-    userCredentials.signedIn && Pass.findById(req.params.id)
+    userCredentials.signedIn && PassengerModel.findById(req.params.id)
     .then(passenger => passenger.remove().then(() => res.json({ success: true })))
         .catch(err => res.status(404).json({ success: false}));
 

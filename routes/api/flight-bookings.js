@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { OneWayBookings, RoundWayBookings } = require('../../models/Bookings');
+const { OneWayBookingsModel, RoundWayBookingsModel } = require('../../models/Bookings');
 const { validateAPIRequest } = require('../../auth.js');
 
 let userCredentials = {};
@@ -17,9 +17,9 @@ router.use('/', (req, res, next) => {
 // List of Flights and prices directly from UI layer to Skyscanner API
 
 // Get Confirmed Bookings
-router.get('/oneWayBookings', (req, res) => {
+router.get('/oneWayBookingsModel', (req, res) => {
   if (userCredentials.signedIn) {
-    OneWayBookings.find({ userEmail: userCredentials.email })
+    OneWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
       .then((items) => res.json(items));
   }
@@ -27,7 +27,7 @@ router.get('/oneWayBookings', (req, res) => {
 
 router.get('/roundTripBookings', (req, res) => {
   if (userCredentials.signedIn) {
-    RoundWayBookings.find({ userEmail: userCredentials.email })
+    RoundWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
       .then((items) => res.json(items));
   }
@@ -37,10 +37,10 @@ router.get('/roundTripBookings', (req, res) => {
 router.post('/confirmBooking', async (req, res) => {
   if (userCredentials.signedIn) {
     const confirmBooking = !req.body.isRoundTrip
-      ? new OneWayBookings({
+      ? new OneWayBookingsModel({
           ...req.body,
         })
-      : new RoundWayBookings({
+      : new RoundWayBookingsModel({
           ...req.body,
         });
 
@@ -54,7 +54,7 @@ router.post('/confirmBooking', async (req, res) => {
 // Delete One Way Booking
 router.delete('/deleteOneWayTrip/:id', (req, res) => {
   if (userCredentials.signedIn) {
-    OneWayBookings.findById(req.params.id)
+    OneWayBookingsModel.findById(req.params.id)
       .then((booking) => booking.remove().then(() => res.json({ success: true })))
       .catch((err) => res.status(404).json({ success: false }));
   }
@@ -63,7 +63,7 @@ router.delete('/deleteOneWayTrip/:id', (req, res) => {
 // Delete Round Trip Booking
 router.delete('/deleteRoundTrip/:id', (req, res) => {
   if (userCredentials.signedIn) {
-    RoundWayBookings.findById(req.params.id)
+    RoundWayBookingsModel.findById(req.params.id)
       .then((booking) => booking.remove().then(() => res.json({ success: true })))
       .catch((err) => res.status(404).json({ success: false }));
   }

@@ -43,7 +43,7 @@ const BookingSchema = new Schema({
   },
 }, baseOptions);
 
-const OneWayBookings = mongoose.model('oneWayTrip', BookingSchema, 'bookinglist');
+const OneWayBookingsModel = mongoose.model('oneWayTrip', BookingSchema, 'bookinglist');
 
 const ReturnBookingSchema = new Schema({
   returnFlightDetails: {
@@ -63,9 +63,9 @@ const ReturnBookingSchema = new Schema({
   },
 });
 
-const RoundWayBookings = OneWayBookings.discriminator('roundWayTrip', ReturnBookingSchema);
+const RoundWayBookingsModel = OneWayBookingsModel.discriminator('roundWayTrip', ReturnBookingSchema);
 
 module.exports = {
-  OneWayBookings ,
-  RoundWayBookings
+  OneWayBookingsModel,
+  RoundWayBookingsModel
 };
