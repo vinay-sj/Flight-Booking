@@ -21,7 +21,7 @@ mongoose
 const bookingsRouter = require("./routes/api/flight-bookings");
 const passengersRouter = require("./routes/api/passenger-details");
 
-app.use(cors({origin: 'http://localhost:3000', credentials: true}));
+app.use(cors({origin: 'https://group-project-avengers-ui.herokuapp.com', credentials: true}));
 app.use('/auth', auth.routes);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/passengers', passengersRouter);
