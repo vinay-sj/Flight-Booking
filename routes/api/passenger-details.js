@@ -17,15 +17,15 @@ router.post('/addPassenger', (req, res) => {
 
 });
 
-router.put('/editPassenger:id', (req, res) => {
+router.put('/editPassenger/:id', (req, res) => {
     Pass.findById(req.params.id)
     .then(passenger => {
         passenger.name = req.body.name;
         passenger.gender = req.body.gender;
-        passenger.birthDate = passenger.birthDate;
-        passenger.emailId = passenger.emailId;
-        passenger.contactNo = passenger.contactNo;
-        passenger.passPortNo = passenger.passPortNo;
+        passenger.birthDate = req.body.birthDate;
+        passenger.emailId = req.body.emailId;
+        passenger.contactNo = req.body.contactNo;
+        passenger.passPortNo = req.body.passPortNo;
         passenger.save();
     }).then(() => res.json({ success: true }))
         .catch(err => res.status(404).json({ success: false}));
