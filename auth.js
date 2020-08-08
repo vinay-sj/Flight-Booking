@@ -15,7 +15,7 @@ const routes = new Router();
 
 const JWT_SECRET = 'jwtsecret_avengers_flight_booking';
 
-routes.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+routes.use(cors({ origin: 'https://group-project-avengers-ui.herokuapp.com', credentials: true }));
 routes.use(bodyParser.json());
 
 routes.post('/signin', async (req, res) => {
