@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const auth = require('./auth.js')
 const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const app = express();
 
@@ -21,7 +22,8 @@ mongoose
 const bookingsRouter = require("./routes/api/flight-bookings");
 const passengersRouter = require("./routes/api/passenger-details");
 
-app.use(cors({origin: 'https://group-project-avengers-ui.herokuapp.com', credentials: true}));
+const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
+app.use(cors({origin: uiServerOrigin, credentials: true}));
 app.use('/auth', auth.routes);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/passengers', passengersRouter);

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 /* Refer to this link to understand how json web tokens validate the tokens
     https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
@@ -15,7 +16,9 @@ const routes = new Router();
 
 const JWT_SECRET = 'jwtsecret_avengers_flight_booking';
 
-routes.use(cors({ origin: 'https://group-project-avengers-ui.herokuapp.com', credentials: true }));
+const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
+
+routes.use(cors({ origin: uiServerOrigin, credentials: true }));
 routes.use(bodyParser.json());
 
 routes.post('/signin', async (req, res) => {
