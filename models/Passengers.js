@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PassengerSchema = new Schema({
+  userEmail: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true,

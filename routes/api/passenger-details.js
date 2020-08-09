@@ -13,14 +13,14 @@ router.use('/', (req, res, next) => {
 });
 
 router.get('/getPassenger', (req, res) => {
-    userCredentials.signedIn && PassengerModel.find({emailId: userCredentials.email})
+    userCredentials.signedIn && PassengerModel.find({userEmail: userCredentials.email})
     .then((items) => res.json(items));
 
 });
 
 router.post('/addPassenger', (req, res) => {
     const passenger = new PassengerModel({
-        ...req.body, ...{emailId: userCredentials.email}
+        ...req.body, ...{userEmail: userCredentials.email}
     });
     userCredentials.signedIn && passenger.save().then((item) => res.status(201).json(item), (err) => res.status(400).json(err));
 
