@@ -36,12 +36,15 @@ router.get('/roundTripBookings', (req, res) => {
 // Create a new Booking
 router.post('/confirmBooking', async (req, res) => {
   if (userCredentials.signedIn) {
+    for (let i=0; i < req.body.passengerDetails.length; i++) {
+      req.body.passengerDetails[i].userEmail = userCredentials.email;
+    }
     const confirmBooking = !req.body.isRoundTrip
       ? new OneWayBookingsModel({
-          ...req.body,
+          ...req.body, ...{userEmail: userCredentials.email}
         })
       : new RoundWayBookingsModel({
-          ...req.body,
+          ...req.body, ...{userEmail: userCredentials.email}
         });
 
     confirmBooking.save().then(
