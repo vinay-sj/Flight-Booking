@@ -26,7 +26,7 @@ const PassengerSchema = new Schema({
     required: false,
   },
   contactNo: {
-    type: Number,
+    type: String,
     required: false,
   },
   passPortNo: {
