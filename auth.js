@@ -14,7 +14,7 @@ require('dotenv').config();
 
 const routes = new Router();
 
-const JWT_SECRET = 'jwtsecret_avengers_flight_booking';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
 
