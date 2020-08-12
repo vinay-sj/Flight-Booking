@@ -18,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
 
-routes.use(cors({ origin: uiServerOrigin, credentials: true }));
+routes.use(cors({ credentials: true }));
 routes.use(bodyParser.json());
 
 routes.post('/signin', async (req, res) => {
