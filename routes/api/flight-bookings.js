@@ -21,7 +21,7 @@ router.get('/oneWayBookings', (req, res) => {
   if (userCredentials.signedIn) {
     OneWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
-      .then((items) => res.json(items));
+      .then((items) => res.json(items || []));
   }
 });
 
@@ -29,7 +29,7 @@ router.get('/roundTripBookings', (req, res) => {
   if (userCredentials.signedIn) {
     RoundWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
-      .then((items) => res.json(items));
+      .then((items) => res.json(items || []));
   }
 });
 

@@ -14,7 +14,7 @@ router.use('/', (req, res, next) => {
 
 router.get('/getPassenger', (req, res) => {
     userCredentials.signedIn && PassengerModel.find({userEmail: userCredentials.email})
-    .then((items) => res.json(items));
+    .then((items) => res.json(items || []));
 
 });
 
