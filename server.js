@@ -22,8 +22,10 @@ mongoose
 const bookingsRouter = require("./routes/api/flight-bookings");
 const passengersRouter = require("./routes/api/passenger-details");
 
-const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
+//const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
+const uiServerOrigin = 'https://group-project-avengers-ui.herokuapp.com';
 app.use(cors({origin: uiServerOrigin, credentials: true}));
+//app.use(cors({credentials: true}));
 app.use('/auth', auth.routes);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/passengers', passengersRouter);
