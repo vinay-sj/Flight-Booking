@@ -37,7 +37,8 @@ routes.post('/signin', async (req, res) => {
   console.log(token)
   console.log('COOKie_DOMAIN')
   console.log(process.env.COOKIE_DOMAIN)
-  res.cookie('jwt', token, { httpOnly: true, path: '/', sameSite:false, domain: process.env.COOKIE_DOMAIN });
+  res.cookie('jwt', token, { httpOnly: true });
+    // , path: '/', sameSite:false, domain: process.env.COOKIE_DOMAIN });
   console.log(res)
   res.json(credentials);
 });
