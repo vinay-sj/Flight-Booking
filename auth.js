@@ -34,7 +34,8 @@ routes.post('/signin', async (req, res) => {
   };
   const token = jwt.sign(credentials, JWT_SECRET);
   /* Uncomment below line so that it works on your localhost and comment the line next to it */
-  // res.cookie('jwt', token, { httpOnly: true, sameSite: 'None' });
+  // res.cookie('jwt', token, { httpOnly: true });
+  /* This following line is critical for production phase, uncomment this line while deploying */
   res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true }); // Critical line needed in production phase
   res.json(credentials);
 });
