@@ -46,7 +46,6 @@ routes.post('/signout', async (req, res) => {
 
 const validateAPIRequest = (req, res) => {
   const validatetoken = req.cookies.jwt;
-  console.log(validatetoken);
   try {
     const validatedCredentials = jwt.verify(validatetoken, JWT_SECRET);
     console.log('validated credentials..........................................................................')
