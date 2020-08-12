@@ -37,15 +37,13 @@ routes.post('/signin', async (req, res) => {
   console.log(token)
   console.log('COOKie_DOMAIN')
   console.log(process.env.COOKIE_DOMAIN)
-  res.cookie('jwt', token, { httpOnly: true, domain: process.env.COOKIE_DOMAIN });
+  res.cookie('jwt', token, { httpOnly: true });
     console.log(res.data)
   res.json(credentials);
 });
 
 routes.post('/signout', async (req, res) => {
-  res.clearCookie('jwt', {
-    domain: process.env.COOKIE_DOMAIN,
-  });
+  res.clearCookie('jwt');
   res.json({ status: 'ok' });
 });
 
