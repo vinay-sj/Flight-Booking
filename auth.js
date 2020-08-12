@@ -37,9 +37,10 @@ routes.post('/signin', async (req, res) => {
   console.log(token)
   console.log('COOKie_DOMAIN')
   console.log(process.env.COOKIE_DOMAIN)
-  res.cookie('jwt', token, { httpOnly: true, sameSite: false, secure: true });
+  res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true });
     // , path: '/', sameSite:false, domain: process.env.COOKIE_DOMAIN });
   console.log(res)
+  // domain: process.env.COOKIE_DOMAIN,
   res.json(credentials);
 });
 
@@ -49,7 +50,7 @@ routes.post('/signout', async (req, res) => {
 });
 
 const validateAPIRequest = (req, res) => {
-    console.log('Cookie........................')
+  console.log('Cookie........................')
   const validatetoken = req.cookies.jwt;
   console.log(validatetoken);
   try {
