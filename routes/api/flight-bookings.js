@@ -8,8 +8,8 @@ let userCredentials = {};
 
 // Default Validation of all API requests towards Bookings 
 router.use('/', (req, res, next) => {
-  // userCredentials = validateAPIRequest(req, res) || {};
-  userCredentials.email='vinaysra@gmail.com'
+  userCredentials = validateAPIRequest(req, res) || {};
+  // userCredentials.email='vinaysra@gmail.com'
   next()
 });
 
@@ -19,19 +19,19 @@ router.use('/', (req, res, next) => {
 
 // Get Confirmed Bookings
 router.get('/oneWayBookings', (req, res) => {
-  // if (userCredentials.signedIn) {
+  if (userCredentials.signedIn) {
     OneWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
       .then((items) => res.json(items));
-  // }
+  }
 });
 
 router.get('/roundTripBookings', (req, res) => {
-  // if (userCredentials.signedIn) {
+  if (userCredentials.signedIn) {
     RoundWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
       .then((items) => res.json(items));
-  // }
+  }
 });
 
 // Create a new Booking
