@@ -21,7 +21,7 @@ router.get('/oneWayBookings', (req, res) => {
   if (userCredentials.signedIn) {
     OneWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
-      .then((items) => res.json(items || []));
+      .then((items) => res.json(items || []), (err) => res.status(400).json({errorMessage: err}));
   }
 });
 
@@ -29,7 +29,7 @@ router.get('/roundTripBookings', (req, res) => {
   if (userCredentials.signedIn) {
     RoundWayBookingsModel.find({ userEmail: userCredentials.email })
       .sort({ bookingDate: -1 })
-      .then((items) => res.json(items || []));
+      .then((items) => res.json(items || []), (err) => res.status(400).json({errorMessage: err}));
   }
 });
 
@@ -49,7 +49,7 @@ router.post('/confirmBooking', async (req, res) => {
 
     confirmBooking.save().then(
       (item) => res.status(201).json(item),
-      (err) => res.status(400).json(err)
+      (err) => res.status(400).json({errorMessage: err})
     );
   }
 });

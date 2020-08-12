@@ -14,7 +14,7 @@ router.use('/', (req, res, next) => {
 
 router.get('/getPassenger', (req, res) => {
     userCredentials.signedIn && PassengerModel.find({userEmail: userCredentials.email})
-    .then((items) => res.json(items || []));
+    .then((items) => res.json(items || []), (err) => res.status(400).json({errorMessage: err}));
 
 });
 
@@ -22,7 +22,7 @@ router.post('/addPassenger', (req, res) => {
     const passenger = new PassengerModel({
         ...req.body, ...{userEmail: userCredentials.email}
     });
-    userCredentials.signedIn && passenger.save().then((item) => res.status(201).json(item), (err) => res.status(400).json(err));
+    userCredentials.signedIn && passenger.save().then((item) => res.status(201).json(item), (err) => res.status(400).json({errorMessage: err}));
 
 });
 
