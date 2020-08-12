@@ -50,7 +50,7 @@ routes.post('/signout', async (req, res) => {
 });
 
 const validateAPIRequest = (req, res) => {
-  console.log('Cookie........................')
+  console.log('Cookie.......................')
   const validatetoken = req.cookies.jwt;
   console.log(validatetoken);
   try {
