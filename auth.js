@@ -52,7 +52,7 @@ const validateAPIRequest = (req, res) => {
   const validatetoken = req.cookies.jwt;
   console.log(validatetoken);
   try {
-      console.log('validated token....................................................................')
+    console.log('validated token.....................................................................')
     console.log(JWT_SECRET);
     const validatedCredentials = jwt.verify(validatetoken, JWT_SECRET);
     console.log('validated credentials..........................................................................')
