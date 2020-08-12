@@ -47,11 +47,17 @@ routes.post('/signout', async (req, res) => {
 const validateAPIRequest = (req, res) => {
   const validatetoken = req.cookies.serverToken;
   try {
+      console.log('validated token....................................................................')
+    console.log(validatedtoken);
+    console.log(JWT_SECRET);
     const validatedCredentials = jwt.verify(validatetoken, JWT_SECRET);
+    console.log('validated credentials..........................................................................')
+    console.log(validatedCredentials)
     return validatedCredentials;
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error
+      console.log('JWT Exception.................................................................................')
       return res.status(401).json({ Message: 'Unauthorized Request, please login first to perform the operation' });
     }
     // otherwise, return a bad request error
