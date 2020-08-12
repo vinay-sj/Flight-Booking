@@ -18,14 +18,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const uiServerOrigin = process.env.UI_SERVER_ORIGIN || 'http://localhost:3000';
 
-routes.all('*', function(req, res, next) {
-  var origin = req.get('origin'); 
-  res.header('Access-Control-Allow-Origin', origin);
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
 routes.use(cors({ origin: uiServerOrigin, credentials: true }));
 routes.use(bodyParser.json());
 
