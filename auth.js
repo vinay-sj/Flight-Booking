@@ -33,12 +33,9 @@ routes.post('/signin', async (req, res) => {
     email,
   };
   const token = jwt.sign(credentials, JWT_SECRET);
-  console.log('token');
-  console.log(token)
-  console.log('COOKie_DOMAIN')
-  console.log(process.env.COOKIE_DOMAIN)
-  res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true });
-  console.log(res)
+  /* Uncomment below line so that it works on your localhost and comment the line next to it */
+  // res.cookie('jwt', token, { httpOnly: true, sameSite: 'None' });
+  res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true }); // Critical line needed in production phase
   res.json(credentials);
 });
 
@@ -48,27 +45,19 @@ routes.post('/signout', async (req, res) => {
 });
 
 const validateAPIRequest = (req, res) => {
-  console.log('Cookie.......................')
   const validatetoken = req.cookies.jwt;
   console.log(validatetoken);
   try {
-    console.log('validated token.....................................................................')
-    console.log(JWT_SECRET);
     const validatedCredentials = jwt.verify(validatetoken, JWT_SECRET);
     console.log('validated credentials..........................................................................')
-    console.log(validatedCredentials)
     return validatedCredentials;
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error
-      console.log('JWT Exception.................................................................................')
-      console.log(e)
-      return res.status(401).json({ Message: 'Unauthorized Request, please login first to perform the operation' });
+      return res.status(401).json({ errorMessage: 'Unauthorized Request, please login first to perform the operation' });
     }
     // otherwise, return a bad request error
-    
-    console.log(e)
-    return res.status(400).json({ Message: 'Bad Request' });
+    return res.status(400).json({ errorMessage: 'Bad Request' });
   }
 };
 
