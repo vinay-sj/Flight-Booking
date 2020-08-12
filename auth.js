@@ -33,22 +33,28 @@ routes.post('/signin', async (req, res) => {
     email,
   };
   const token = jwt.sign(credentials, JWT_SECRET);
-  res.cookie('serverToken', token, { httpOnly: true,  domain: process.env.COOKIE_DOMAIN });
+  console.log('token');
+  console.log(token)
+  console.log('COOKie_DOMAIN')
+  console.log(process.env.COOKIE_DOMAIN)
+  res.cookie('jwt', token, { httpOnly: true, domain: process.env.COOKIE_DOMAIN });
+    console.log(res.data)
   res.json(credentials);
 });
 
 routes.post('/signout', async (req, res) => {
-  res.clearCookie('serverToken', {
+  res.clearCookie('jwt', {
     domain: process.env.COOKIE_DOMAIN,
   });
   res.json({ status: 'ok' });
 });
 
 const validateAPIRequest = (req, res) => {
-  const validatetoken = req.cookies.serverToken;
+    console.log('Cookie........................')
+  const validatetoken = req.cookies.jwt;
+  console.log(validatetoken);
   try {
       console.log('validated token....................................................................')
-    console.log(validatedtoken);
     console.log(JWT_SECRET);
     const validatedCredentials = jwt.verify(validatetoken, JWT_SECRET);
     console.log('validated credentials..........................................................................')
