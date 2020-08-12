@@ -33,12 +33,14 @@ routes.post('/signin', async (req, res) => {
     email,
   };
   const token = jwt.sign(credentials, JWT_SECRET);
-  res.cookie('serverToken', token, { httpOnly: true });
+  res.cookie('serverToken', token, { httpOnly: true,  domain: process.env.COOKIE_DOMAIN });
   res.json(credentials);
 });
 
 routes.post('/signout', async (req, res) => {
-  res.clearCookie('serverToken');
+  res.clearCookie('serverToken', {
+    domain: process.env.COOKIE_DOMAIN,
+  });
   res.json({ status: 'ok' });
 });
 
